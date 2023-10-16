@@ -1,6 +1,7 @@
 package Test2_oop;
 
 import java.util.Arrays;
+import java.util.StringJoiner;
 
 
 public class StringUse {
@@ -70,13 +71,100 @@ public class StringUse {
 //        System.out.println(Arrays.toString(cs));  //[X,e,l,l,o]
 //
 
-        int[] scores = new int[]{88,77,51,66};
-        Score s  = new Score(scores);
-        s.printScores();
-        scores[2] = 99;
-        s.printScores();
+
+//        //保证score成绩的安全，不会因为外部数据的改变而产生不安全行为
+//        int[] scores = new int[]{88,77,51,66};
+//        Score s  = new Score(scores);
+//        s.printScores();
+//        scores[2] = 99;
+//        s.printScores();
+
+
+//        //StringBuilder的使用
+//        StringBuilder sb = new StringBuilder(1024);
+//        for (int i = 0; i < 1000; i++) {
+//            sb.append(i);
+//            sb.append(',');
+//        }
+//        String s = sb.toString();
+//        System.out.println(s);
+//
+//        //StringBuilder链式操作
+//        StringBuilder sb1 = new StringBuilder(1024);
+//        sb1.append("Mr ").append("Bob ").append("!").insert(0,"Hello, ");
+//        String ss = sb1.toString();
+//        System.out.println(ss);
+
+
+//        //使用StringBuilder实现一个Insert语句
+//        String[] fields = {"name","position","salary"};
+//        String table = "employee";
+//        String insert = builderInsertSql(table,fields);
+//        System.out.println(insert);
+//        String s = "INSERT INTO employee (name,position,salary) VALUES (?,?,?)";
+//        System.out.println(s.equals(insert) ? "测试成功" : "测试失败");
+
+//        //使用StringJoiner方法
+//        String[] names = {"Bob","Alice","Grace"};
+//        var sj = new StringJoiner(", ","Hello ","!");
+//        for (String name:names) {
+//            sj.add(name);
+//        }
+//        System.out.println(sj);
+//
+//        //String中的join方法，实现拼接
+//        String[] arr = {"bob","alice","grace"};
+//        String sss = String.join(",",arr);
+//        System.out.println(sss);
+
+//        //使用StringJoiner进行拼接
+//        String[] fields = {"name","position","salary"};
+//        String table = "employee";
+//        String select = builderSelectSql(table,fields);
+//        System.out.println(select);
+//        System.out.println("SELECT name,position,salary FROM employee".equals(select) ? "测试成功" : "测试失败");
+
+
+        Weekday day = Weekday.SUN;
+        if(day == Weekday.SAT || day == Weekday.SUN){
+            System.out.println("Work at home!");
+        }else{
+            System.out.println("Work at office!");
+        }
+
+
 
     }
+
+//      //使用StringBuilder实现insert语句拼接，实现静态方法
+//    static String builderInsertSql(String table,String[] fields){
+//
+//        StringBuilder s = new StringBuilder(1024);
+//
+//        s.append("INSERT INTO ").append(table).append(" ").append("(");
+//        for (String name:fields) {
+//            s.append(name).append(",");
+//        }
+//        s.delete(s.length()-1,s.length());
+//        s.append(") ").append("VALUES (?,?,?)");
+//        return s.toString();
+//    }
+
+
+//    //使用StringJoiner进行拼接
+//        static String builderSelectSql(String table,String[] fields){
+//            StringBuilder s = new StringBuilder(1024);
+//            StringJoiner j = new StringJoiner(",");
+//            for (String sj:fields) {
+//                j.add(sj);
+//            }
+//            s.append("SELECT ").append(j).append(" FROM ").append(table);
+//            return s.toString();
+//        }
+
+
+
+
 }
 
 class Score{
@@ -89,4 +177,8 @@ class Score{
     public void printScores(){
         System.out.println(Arrays.toString(scores));
     }
+}
+
+enum Weekday{
+    SUN,MON,TUE,WED,THU,FRI,SAT;
 }
